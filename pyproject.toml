@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mats-l1b-tools"
+version = "0.1.0"
+authors = [
+    { name="MATS science team", email="matslead@misu.su.se" },
+]
+description = "A package for downloading and manipulating MATS l1b data"
+readme = "README.md"
+license = { file="LICENSE" }
+dependencies = [
+    "requests>=2.25.1",
+]
