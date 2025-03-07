@@ -1,0 +1,12 @@
+{
+    "Metadata":{
+        "l1_calibration_database_version": 1,
+        "date_generated": "2024-03-07"
+    },
+
+    "IR1": {
+        "absolute_calibration": 0.026921196885336868,
+        "alpha": 34.89565623,
+        "amp_correction": 1.0
+    }
+}
