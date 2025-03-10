@@ -5,36 +5,66 @@ import numpy as np
 import xarray as xr
 import json
 from scipy.io import loadmat
+import os
 
+# Change the current working directory
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
 #%%
 ds_slice = xr.open_zarr('../ir1.zarr')
 
 with open('../data/calibration_data.json', 'r') as file:
-    data = json.load(file)
-
+   data = json.load(file)
 
 #%%
 
-def add_stat_error(ds_slice,channel):
-
+def add_stat_error(ds_slice,channel):   
+    ds_slice = photons2lsb(ds_slice,channel,add_to_ds = True)
+    ds_slice = calc_bit_window(ds_slice)
     shot_noise = calc_shot_noise(ds_slice,channel)
-    ds_slice['StatisticalError'] = shot_noise
+    digi_noise = calc_digitization_noise(ds_slice,channel)
+    compression_noise = calc_compression_noise(ds_slice,channel)
+
+    ds_slice['StatisticalError'] = np.sqrt(shot_noise**2 + digi_noise**2 + compression_noise**2)
 
     return ds_slice
 
-def calc_shot_noise(dc_slice,channel):
+def calc_shot_noise(ds_slice,channel):
+    if not ('ImageCalibrated_lsb' in ds_slice.variables):
+        raise KeyError('Image in LSB not avalible')
     alpha = data[channel]['alpha'] #gain (electron per count)
     amp_correction = data[channel]['amp_correction'] #correction for pre-amplificaion (UV channels only)
-
-    ImageCalibrated_lsb = photons2lsb(dc_slice,channel)
-    ImageCalibrated_electrons = ImageCalibrated_lsb*alpha/amp_correction
+ 
+    ImageCalibrated_electrons = ds_slice.ImageCalibrated_lsb*alpha/amp_correction
     error_electrons = np.sqrt(ImageCalibrated_electrons)
     error_lsb = error_electrons/alpha*amp_correction
     error_photons = lsb2photons(ds_slice, channel, error_lsb)
 
     return error_photons
 
-def photons2lsb(ds_slice, channel):
+def calc_digitization_noise(ds_slice,channel):
+    if not ('WindowMode' in ds_slice.variables):
+        raise KeyError('WindowMode not avalible')
+    data_window = ds_slice['WindowMode']
+    noise_lsb = 2**data_window
+    noise_ph = lsb2photons(ds_slice,channel,noise_lsb)
+    return noise_ph
+
+def calc_compression_noise(dc_slice,channel):
+    if not ('WindowMode' in ds_slice.variables):
+        raise KeyError('WindowMode not avalible')
+    data_window = ds_slice['WindowMode']
+    jpeq = ds_slice.JPEGQ
+    #takes in CCDitem and calulates shot noise
+    rms_noise = np.array([6.2,6,5.3,4.5,3.3,2,0]) #from MATS CDR (can probably be remade)
+    jpegq = np.array([70,75,80,85,90,95,100]) #from MATS CDR (can probably be remade)
+    jpeg_noise = np.interp(jpeq,jpegq,rms_noise)
+    noise_lsb = jpeg_noise*(2**data_window)
+    noise_ph = lsb2photons(ds_slice,channel,noise_lsb)
+
+    return noise_ph
+
+def photons2lsb(ds_slice, channel, add_to_ds = False):
     """ Converts photon counts to least significant bits (LSBs) using calibration data.
 
     Args:
@@ -51,7 +81,11 @@ def photons2lsb(ds_slice, channel):
     # Perform the calculation
     ImageCalibrated_lsb = ds_slice['ImageCalibrated'] * texp_seconds * absolute_calibration * totbin  # counts in each binned pixel
 
-    return ImageCalibrated_lsb
+    if add_to_ds:
+        ds_slice['ImageCalibrated_lsb'] = ImageCalibrated_lsb
+        return ds_slice
+    else:
+        return ImageCalibrated_lsb
 
 def lsb2photons(ds_slice, channel, ImageCalibrated_lsb):
     """ Converts calibrated image data from least significant bits (LSBs) back to photon counts.
@@ -73,7 +107,51 @@ def lsb2photons(ds_slice, channel, ImageCalibrated_lsb):
 
     return ImageCalibrated
 
+def bits_needed(arr):
+    """
+    Calculate the bit length for each element in a numeric array, handling non-integer types and errors.
+    For non-integer types, elements are converted to integers. If the bit length exceeds 12, it is reduced by 12,
+    otherwise, it is set to 0. If conversion fails, the position is filled with NaN.
 
+    Args:
+        arr (np.ndarray): A numpy array of numbers for which to calculate bit lengths.
+
+    Returns:
+        np.ndarray: An array of the same shape as `arr` containing the calculated bit lengths or modified bit lengths.
+    """
+    output = np.full(arr.shape, np.nan)  # Initialize an output array of the same shape filled with NaN
+    
+    for idx, element in np.ndenumerate(arr):
+        try:
+            if isinstance(element, (int, np.integer)):
+                output[idx] = element.bit_length()
+            else:
+                element = int(element)  # Convert to integer if it's a float or any float-like type
+                output[idx] = np.maximum((element.bit_length() - 12), 0)
+        except (ValueError, TypeError):
+            continue  # Leave the output as NaN in case of an error
+    
+    return output 
+
+
+def calc_bit_window(ds_slice):
+    """
+    Applies the bits_needed function to the maximum value of 'ImageCalibrated_lsb' across specified axes in an xarray dataset,
+    and stores the result in a new variable 'WindowMode' within the dataset.
+
+    Args:
+        ds_slice (xarray.Dataset): The dataset containing 'ImageCalibrated_lsb' data array.
+
+    Returns:
+        xarray.Dataset: The updated dataset including a new 'WindowMode' data variable.
+    """
+    num_bits = xr.apply_ufunc(
+        bits_needed, 
+        ds_slice.ImageCalibrated_lsb.max(axis=1).max(axis=1)
+    )
+    ds_slice['WindowMode'] = num_bits
+
+    return ds_slice
 
 #%% only working for IR1 at the moment
 channel = 'IR1'
@@ -90,5 +168,6 @@ ax.plot(mean_errors.T[:,::100],np.arange(0,mean_errors.shape[1]))  # Multiply by
 ax.set_xlim([0, 20])  # Set limits for x-axis
 ax.set_xlabel('Error %')  # Set x-axis label
 ax.set_ylabel('Row number')
-plt.title('Shot noise IR1')
+plt.title('Total noise IR1')
 plt.show()
+# %%
