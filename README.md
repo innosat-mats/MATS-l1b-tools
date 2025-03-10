@@ -27,4 +27,4 @@ Note that filtering can only be used with variables that have one value per imag
 
 An example command for running get_zarr.py:
 
-    python ~/software/MATS-L2-processing/scripts/get_zarr.py zip::https://bolin.su.se/data/s31/data/mats-level-1b-limb-cropd-1.0-root/mats-level-1b-limb-cropd-UV2.zarr.zip -b 2023 2 20 0 0 0 -e 2023 3 1 0 0 0  -f TPlon 10 30
+    python get_zarr.py zip::https://bolin.su.se/data/s31/data/mats-level-1b-limb-cropd-1.0-root/mats-level-1b-limb-cropd-UV2.zarr.zip -b 2023 2 20 0 0 0 -e 2023 3 1 0 0 0  -f TPlon 10 30
