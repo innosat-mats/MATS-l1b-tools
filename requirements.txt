@@ -1,0 +1,10 @@
+aiohttp
+DateTime
+fsspec
+netCDF4
+numpy
+requests
+xarray
+zarr<3.0
+zipp
+scipy
