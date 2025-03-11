@@ -1,4 +1,3 @@
-from mats_l1b_tools import read_functions as rf
 from matplotlib import pyplot as plt
 import numpy as np
 import xarray as xr
@@ -20,8 +19,17 @@ def add_stat_error(ds_slice, channel):
     Returns:
         ds_slice: xarray.Dataset updated with a new data variable 'StatisticalError' that contains the calculated statistical errors.
     """
+
+    photons2lsb(ds_slice, channel,append_ds = True)
+    calc_bit_window(ds_slice)
+    
     shot_noise = calc_shot_noise(ds_slice, channel)
-    ds_slice['StatisticalError'] = shot_noise
+    digi_noise = calc_digitization_noise(ds_slice, channel)
+    jpeg_noise = calc_compression_noise(ds_slice, channel)
+    ro_noise = calc_readout_noise(ds_slice, channel)
+
+    
+    ds_slice['StatisticalError'] = np.sqrt(shot_noise**2 + digi_noise**2 + jpeg_noise**2 + ro_noise**2)
 
     return ds_slice
 
@@ -38,11 +46,13 @@ def calc_shot_noise(ds_slice, channel):
     Returns:
         error_photons: xarray.DataArray representing the shot noise in terms of radiance units.
     """
+    if 'ImageCalibrated_lsb' not in ds_slice.variables:
+        raise KeyError('ImageCalibrated_lsb not available')
+
     alpha = data[channel]['alpha']  # gain (electron per count)
     amp_correction = data[channel]['amp_correction']  # correction for pre-amplification (UV channels only)
 
-    ImageCalibrated_lsb = photons2lsb(ds_slice, channel)
-    ImageCalibrated_electrons = ImageCalibrated_lsb * alpha / amp_correction
+    ImageCalibrated_electrons = ds_slice['ImageCalibrated_lsb'] * alpha / amp_correction
     error_electrons = np.sqrt(ImageCalibrated_electrons)
     error_lsb = error_electrons / alpha * amp_correction
     error_photons = lsb2photons(ds_slice, channel, error_lsb)
@@ -100,7 +110,18 @@ def calc_compression_noise(ds_slice, channel):
     
     return noise_ph
 
-def photons2lsb(ds_slice, channel):
+def calc_readout_noise(ds_slice, channel):
+
+    alpha = data[channel]['alpha']  # gain (electron per count)
+    amp_correction = data[channel]['amp_correction']  # correction for pre-amplification (UV channels only)
+    e_noise = data[channel]['ro_avr'] #readout noise in electrons
+
+    noise_lsb = e_noise/alpha*amp_correction
+    noise_ph = lsb2photons(ds_slice, channel, noise_lsb)
+    
+    return noise_ph
+
+def photons2lsb(ds_slice, channel,append_ds = False):
     """ Converts photon counts to least significant bits (LSBs) using calibration data.
 
     Args:
@@ -117,7 +138,11 @@ def photons2lsb(ds_slice, channel):
     # Perform the calculation
     ImageCalibrated_lsb = ds_slice['ImageCalibrated'] * texp_seconds * absolute_calibration * totbin  # counts in each binned pixel
 
-    return ImageCalibrated_lsb
+    if append_ds:
+        ds_slice['ImageCalibrated_lsb'] = ImageCalibrated_lsb
+        return ds_slice
+    else:
+        return ImageCalibrated_lsb
 
 def lsb2photons(ds_slice, channel, ImageCalibrated_lsb):
     """ Converts calibrated image data from least significant bits (LSBs) back to photon counts.
