@@ -23,7 +23,7 @@ channel = 'IR1'
 
 #%% Add error to Xarray
 ds_slice = add_info.add_stat_error(ds_slice,channel)# %%
-ro_error = calc_readout_noise(ds_slice,channel)
+ro_error = add_info.calc_readout_noise(ds_slice,channel)
 # %% Calculate an plot error ratio
 error_ratio = (ds_slice['StatisticalError'] / ds_slice['ImageCalibrated'])
 mean_errors = error_ratio.mean(axis=2).to_numpy()*100
