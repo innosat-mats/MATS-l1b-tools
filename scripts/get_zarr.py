@@ -76,18 +76,20 @@ def addTPdata(ds):
     # Interpolate tangent point coordinate data
     x, y = ds["geo_coord_x"].to_numpy(), ds["geo_coord_y"].to_numpy()
     cols, rows = ds["im_col"].to_numpy(), ds["im_row"].to_numpy()
-    geoloc = np.transpose(ds["geoloc"].to_numpy(), axes=(1, 2, 3, 0))
-    outpoints = np.array(np.meshgrid(rows, cols, indexing='ij')).T.reshape(-1, 2)
+    geoloc = np.transpose(ds["geoloc"].to_numpy(), axes=(2, 1, 3, 0))
+    outpoints = np.transpose(np.stack(np.meshgrid(rows, cols, indexing='ij')),
+                             axes=(1, 2, 0)).reshape(-1, 2)
     shape = (len(rows), len(cols), geoloc.shape[2], geoloc.shape[3])
-    res = np.transpose(interpn((y, x), geoloc, outpoints, method='cubic').reshape(shape), axes=(3, 0, 1, 2))
-
+    res = np.transpose(interpn((y, x), geoloc, outpoints, method='cubic').reshape(shape),
+                       axes=(2, 3, 0, 1))
+    
     # Add the interpolated data to the data set
     var = [{"name": "TPheightPixel", "long_name": "Altitude of tangent point for each pixel"},
            {"name": "TPECEFx", "long_name": "Tangent point x coordinate in ECEF frame, for each pixel"},
            {"name": "TPECEFy", "long_name": "Tangent point y coordinate in ECEF frame, for each pixel"},
            {"name": "TPECEFz", "long_name": "Tangent point z coordinate in ECEF frame, for each pixel"}]
     for i, v in enumerate(var):
-        ds = ds.assign({v["name"]: (("time", "im_row", "im_col"), res[:, :, :, i])})
+        ds = ds.assign({v["name"]: (("time", "im_row", "im_col"), res[i, ...])})
         ds[v["name"]].attrs = {"long_name": v["long_name"], "units": "meter"}
 
     # Remove the variables that were used to store uninterpolated tangent point corrdinates
