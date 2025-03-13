@@ -7,6 +7,7 @@
     "IR1": {
         "absolute_calibration": 0.026921196885336868,
         "alpha": 34.89565623,
-        "amp_correction": 1.0
+        "amp_correction": 1.0,
+        "ro_avr": 62.26731045
     }
 }
