@@ -1,5 +1,7 @@
 # MATS-l1b-tools
 Repository to hold tools for manipulating, plotting and analyzing MATS L1b dataset. 
+For assistance and discussiond please consider joining our MATS discord community
+https://discord.com/channels/1197482909997727774/1197482911763533836
 
 
 #### MATS data download with get_zarr.py script
