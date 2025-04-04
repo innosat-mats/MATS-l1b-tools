@@ -4,7 +4,8 @@ fsspec
 netCDF4
 numpy
 requests
+s3fs
+scipy
 xarray
 zarr<3.0
 zipp
-scipy
