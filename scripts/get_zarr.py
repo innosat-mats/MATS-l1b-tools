@@ -2,6 +2,7 @@ import datetime as DT
 import numpy as np
 import argparse
 import xarray as xr
+import s3fs
 from scipy.interpolate import interpn
 
 
@@ -14,7 +15,19 @@ def get_args():
 
     parser = argparse.ArgumentParser(description="Download MATS data from a zarr database",
                                      formatter_class=argparse.MetavarTypeHelpFormatter)
-    parser.add_argument("address", type=str, help="Zarr archive adress")
+    # Data source options
+    source = parser.add_mutually_exclusive_group(required=True)
+    source.add_argument("-a", "--address", type=str,
+                        help="Explicitly specify zarr archive address. Overrides channel, url, path_full, bath_base.")
+    source.add_argument("-c", "--channel", type=str, choices=["IR1", "IR2", "IR3", "IR4", "UV1", "UV2"],
+                        help="Data channel to download")
+    parser.add_argument("-u", "--url", type=str, default="https://bolin.su.se/data/s3/",
+                        help="URL of the server")
+    parser.add_argument("-p", "--path_base", type=str,
+                        default='data/mats-level-1b-limb-cropd-1.0/mats-level-1b-limb-cropd-',
+                        help="Base zarr file path on the server (without channel name)")
+    parser.add_argument("-P", "--path_full", type=str,
+                        help="Full zarr file path on the server (overrides path_base argument)")
 
     # Data filtering options
     parser.add_argument("-b", "--start_time", type=int, nargs=6,
@@ -82,7 +95,7 @@ def addTPdata(ds):
     shape = (len(rows), len(cols), geoloc.shape[2], geoloc.shape[3])
     res = np.transpose(interpn((y, x), geoloc, outpoints, method='cubic').reshape(shape),
                        axes=(2, 3, 0, 1))
-    
+
     # Add the interpolated data to the data set
     var = [{"name": "TPheightPixel", "long_name": "Altitude of tangent point for each pixel"},
            {"name": "TPECEFx", "long_name": "Tangent point x coordinate in ECEF frame, for each pixel"},
@@ -99,9 +112,21 @@ def addTPdata(ds):
 
 
 def main():
-    # Parse command line arguments and open the specified zarr data set
+    # Parse command line arguments
     args = get_args()
-    dsf = xr.open_zarr(args.address, storage_options={"anon": True})
+
+    # Open the specified zarr data set
+    if args.address:
+        dsf = xr.open_zarr(args.address, storage_options={"anon": True})
+    else:
+        fs = s3fs.S3FileSystem(client_kwargs={"endpoint_url": args.url}, anon=True, skip_instance_cache=True)
+        if args.path_full:
+            path = args.path_full
+        else:
+            path = f"{args.path_base}{args.channel}.zarr"
+        mapper = fs.get_mapper(path)
+
+        dsf = xr.open_zarr(mapper, consolidated=True)
 
     # Apply time filtering, if requested
     if np.logical_xor(args.start_time is None, args.stop_time is None):
