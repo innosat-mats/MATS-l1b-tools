@@ -11,14 +11,14 @@ If you only wish to use the data download script, it should be sufficient to ins
 
 The script can be executed by running 
 
-    python get_zarr.py <address> [options]
+    python get_zarr.py [options]
 
-The address should be the web address of the zarr archive to be read. Must be preceded with "zip::" if the archive is zipped. Available options:
+ Available options:
 
 | Option    | Description |
 | --------- | ----------- |                       
 |-h or --help                           | Show short help info and exit |
-|-c or --channel                        | Data channel to download.<br>Can be IR1, IR2, IR3, IR4, UV1, UV2. |
+|-c or --channel                        | Data channel to download.<br>Can be IR1, IR2, IR3, IR4, UV1, UV2.<br>This is mandatory unless advanced options are used. |
 |-b or --start_time YYYY MM DD hh mm ss | Start time for data set |
 |-e or --stop_time YYYY MM DD hh mm ss  | Stop time for data set |
 |-f or --filter [variable] [lower bound] [upper bound] | Filter data set by values of given variable |
