@@ -31,7 +31,7 @@ contour_plot = plt.contour(tanalt_data, colors='black', linestyles='dashed', ori
 plt.clabel(contour_plot, inline=True, fontsize=8, fmt='%1.1f')
 plt.xlabel('Image Column Number')
 plt.ylabel('Image Row Number')
-plt.title('Image from IR2 with tangent altitudes (km)')
+plt.title('Image from IR1 with tangent altitudes (km)')
 plt.show()
 # %%
 # Plot the 50th image using tangent altitude as y axis
@@ -44,5 +44,5 @@ plt.pcolor(ds_slice.im_col.values,tanalt_grid*1e-3,images_gridded[:,:,50])
 plt.xlabel('Image Column Number')
 plt.ylabel('Tangent alitude (km)')
 plt.colorbar()
-plt.title('Image from IR2')
+plt.title('Image from IR1 aligned on tangent alts.')
 plt.show()

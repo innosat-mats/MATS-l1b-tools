@@ -49,6 +49,6 @@ def grid_on_tanalt(ds,dz = 500):
         tanalt_data = ds.isel(time=50).TPheightPixel
 
         for i in range(image_data.shape[1]):
-            images_gridded[:,i,j] = np.interp(y_new,tanalt_data[:,i],image_data[:,i])
+            images_gridded[:,i,j] = np.interp(y_new,tanalt_data[:,i],image_data[:,i],left=np.nan, right=np.nan)
 
     return images_gridded,y_new
