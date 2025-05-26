@@ -1,0 +1,9 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "im_row",
+        "im_col"
+    ],
+    "description": "Error flags combined into single value (see documentation)",
+    "units": ""
+}

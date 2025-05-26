@@ -1,0 +1,7 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time"
+    ],
+    "long_name": "CCD housing temperature",
+    "units": "degree_celsius"
+}

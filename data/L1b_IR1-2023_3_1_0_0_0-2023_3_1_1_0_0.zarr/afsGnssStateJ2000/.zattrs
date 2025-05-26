@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "gnss_state"
+    ],
+    "long_name": "GNSS state in J2000 frame",
+    "units": ""
+}

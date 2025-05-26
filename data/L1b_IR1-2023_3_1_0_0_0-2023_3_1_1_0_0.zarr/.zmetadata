@@ -1,0 +1,1021 @@
+{
+    "metadata": {
+        ".zattrs": {
+            "creator_email": "matslead@misu.su.se",
+            "creator_institution": "Department of Meteorology, Stockholm University",
+            "creator_name": "Linda Megner",
+            "date_created": "2025-03-17",
+            "keywords": "Atmosphere, Middle Atmosphere, Airglow, Mesosphere Lower Thermosphere (MLT), Noctilucent clouds, Gravity waves",
+            "license": "Open Data Commons Attribution License (ODC-By) v1.0",
+            "summary": "MATS satellite images (level 1b) of airglow and noctilucent clouds in the mesosphere/lower thermosphere",
+            "title": "mats-level-1b-limb-IR1-1.0"
+        },
+        ".zgroup": {
+            "zarr_format": 2
+        },
+        "CalibrationErrors/.zarray": {
+            "chunks": [
+                4096,
+                187,
+                44
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577,
+                187,
+                44
+            ],
+            "zarr_format": 2
+        },
+        "CalibrationErrors/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "im_row",
+                "im_col"
+            ],
+            "description": "Error flags combined into single value (see documentation)",
+            "units": ""
+        },
+        "DataLevel/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<U3",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "DataLevel/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Earth Observation Data Level",
+            "units": ""
+        },
+        "ImageCalibrated/.zarray": {
+            "chunks": [
+                4096,
+                187,
+                44
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f4",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577,
+                187,
+                44
+            ],
+            "zarr_format": 2
+        },
+        "ImageCalibrated/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "im_row",
+                "im_col"
+            ],
+            "long_name": "Calibrated image (spectral radiance)",
+            "standard_name": "spectral_radiance",
+            "units": "photon nanometer-1 meter-2 steradian-1 second-1"
+        },
+        "JPEGQ/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "JPEGQ/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "JPEG compression quality setting",
+            "units": ""
+        },
+        "L1ACode/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<U49",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "L1ACode/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Version and git commit hash of L1A software",
+            "units": ""
+        },
+        "L1BCode/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<U47",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "L1BCode/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Version and git commit hash of L1B software",
+            "units": ""
+        },
+        "NCBINCCDColumns/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "NCBINCCDColumns/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Number of columns binned together on-chip",
+            "units": ""
+        },
+        "NCBINFPGAColumns/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "NCBINFPGAColumns/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Number of columns binned together in FPGA",
+            "units": ""
+        },
+        "NCOL/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "NCOL/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Number of columns in the image",
+            "units": ""
+        },
+        "NCSKIP/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "NCSKIP/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Number of columns skipped before binning",
+            "units": ""
+        },
+        "NRBIN/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "NRBIN/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Number of rows that are binned together",
+            "units": ""
+        },
+        "NROW/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "NROW/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Number of rows in the image",
+            "units": ""
+        },
+        "NRSKIP/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "NRSKIP/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Number of rows skipped before binning",
+            "units": ""
+        },
+        "TEXPMS/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "TEXPMS/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Image exposure duration",
+            "units": "millisecond"
+        },
+        "TPheight/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "TPheight/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Altitude of tangent point for nominal instrument axis at the time of measurement",
+            "units": "meter"
+        },
+        "TPlat/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "TPlat/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Latitude of tangent point for nominal instrument axis at the time of measurement",
+            "units": "degree_north"
+        },
+        "TPlon/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "TPlon/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Longitude of tangent point for nominal instrument axis at the time of measurement",
+            "units": "degree_east"
+        },
+        "TPssa/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "TPssa/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Solar scattering angle at tangent point",
+            "standard_name": "scattering_angle",
+            "units": "degree"
+        },
+        "TPsza/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "TPsza/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Solar zenith angle at tangent point",
+            "standard_name": "solar_zenith_angle",
+            "units": "degree"
+        },
+        "WDWInputDataWindow/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<U6",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "WDWInputDataWindow/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Window configuration setting",
+            "units": ""
+        },
+        "afsAttitudeState/.zarray": {
+            "chunks": [
+                4096,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577,
+                4
+            ],
+            "zarr_format": 2
+        },
+        "afsAttitudeState/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "quaternion"
+            ],
+            "long_name": "Quaternion relating satelite body frame to Earth-centered inertial (ECI) coordinate",
+            "units": ""
+        },
+        "afsGnssStateJ2000/.zarray": {
+            "chunks": [
+                4096,
+                6
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577,
+                6
+            ],
+            "zarr_format": 2
+        },
+        "afsGnssStateJ2000/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "gnss_state"
+            ],
+            "long_name": "GNSS state in J2000 frame",
+            "units": ""
+        },
+        "channel/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<U3",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "channel/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Channel name",
+            "units": ""
+        },
+        "geo_coord_x/.zarray": {
+            "chunks": [
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                4
+            ],
+            "zarr_format": 2
+        },
+        "geo_coord_x/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "geo_coord_x"
+            ],
+            "long_name": "X Pixel",
+            "units": ""
+        },
+        "geo_coord_y/.zarray": {
+            "chunks": [
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                4
+            ],
+            "zarr_format": 2
+        },
+        "geo_coord_y/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "geo_coord_y"
+            ],
+            "long_name": "Y Pixel",
+            "units": ""
+        },
+        "geo_data/.zarray": {
+            "chunks": [
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<U11",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                4
+            ],
+            "zarr_format": 2
+        },
+        "geo_data/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "geo_data"
+            ],
+            "long_name": "Geolocation data",
+            "units": ""
+        },
+        "geoloc/.zarray": {
+            "chunks": [
+                4096,
+                4,
+                4,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577,
+                4,
+                4,
+                4
+            ],
+            "zarr_format": 2
+        },
+        "geoloc/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "geo_coord_x",
+                "geo_coord_y",
+                "geo_data"
+            ],
+            "long_name": "Geolocation data",
+            "units": "meter"
+        },
+        "gnss_state/.zarray": {
+            "chunks": [
+                6
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|i1",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                6
+            ],
+            "zarr_format": 2
+        },
+        "gnss_state/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "gnss_state"
+            ],
+            "long_name": "GNSS State Components",
+            "units": ""
+        },
+        "im_col/.zarray": {
+            "chunks": [
+                44
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                44
+            ],
+            "zarr_format": 2
+        },
+        "im_col/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "im_col"
+            ],
+            "long_name": "Image Column Number",
+            "units": ""
+        },
+        "im_row/.zarray": {
+            "chunks": [
+                187
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                187
+            ],
+            "zarr_format": 2
+        },
+        "im_row/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "im_row"
+            ],
+            "long_name": "Image Row Number",
+            "units": ""
+        },
+        "nadir_az/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "nadir_az/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Solar azimuth angle at satellite position",
+            "units": "degree"
+        },
+        "nadir_sza/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "nadir_sza/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Solar zenith angle at satellite position",
+            "units": "degree"
+        },
+        "qprime/.zarray": {
+            "chunks": [
+                4096,
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577,
+                4
+            ],
+            "zarr_format": 2
+        },
+        "qprime/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time",
+                "quaternion"
+            ],
+            "long_name": "Quaternion relating channel to satellite body frame",
+            "units": ""
+        },
+        "quaternion/.zarray": {
+            "chunks": [
+                4
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "|i1",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                4
+            ],
+            "zarr_format": 2
+        },
+        "quaternion/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "quaternion"
+            ],
+            "long_name": "Quaternion Components",
+            "units": ""
+        },
+        "satheight/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "satheight/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Satellite altitude at time of measurement",
+            "units": "meter"
+        },
+        "satlat/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "satlat/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Satellite latitude at time of measurement",
+            "standard_name": "deployment_latitude",
+            "units": "degree_north"
+        },
+        "satlon/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "satlon/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Satellite longitude at time of measurement",
+            "standard_name": "deployment_longitude",
+            "units": "degree_east"
+        },
+        "schedule_id/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "schedule_id/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Schedule id",
+            "units": ""
+        },
+        "schedule_version/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "schedule_version/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "Schedule version",
+            "units": ""
+        },
+        "schedule_yaw_correction/.zarray": {
+            "chunks": [],
+            "compressor": null,
+            "dtype": "<i4",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [],
+            "zarr_format": 2
+        },
+        "schedule_yaw_correction/.zattrs": {
+            "_ARRAY_DIMENSIONS": [],
+            "long_name": "Scheduled yaw correction (1 if True)",
+            "units": ""
+        },
+        "temperature/.zarray": {
+            "chunks": [
+                4096
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<f8",
+            "fill_value": "NaN",
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "temperature/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "long_name": "CCD housing temperature",
+            "units": "degree_celsius"
+        },
+        "time/.zarray": {
+            "chunks": [
+                61467
+            ],
+            "compressor": {
+                "blocksize": 0,
+                "clevel": 5,
+                "cname": "lz4",
+                "id": "blosc",
+                "shuffle": 1
+            },
+            "dtype": "<i8",
+            "fill_value": null,
+            "filters": null,
+            "order": "C",
+            "shape": [
+                577
+            ],
+            "zarr_format": 2
+        },
+        "time/.zattrs": {
+            "_ARRAY_DIMENSIONS": [
+                "time"
+            ],
+            "calendar": "proleptic_gregorian",
+            "long_name": "Time of Observation",
+            "standard_name": "time",
+            "units": "nanoseconds since 2000-01-01"
+        }
+    },
+    "zarr_consolidated_format": 1
+}

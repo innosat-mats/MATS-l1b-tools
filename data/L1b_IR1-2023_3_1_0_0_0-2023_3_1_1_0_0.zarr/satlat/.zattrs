@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time"
+    ],
+    "long_name": "Satellite latitude at time of measurement",
+    "standard_name": "deployment_latitude",
+    "units": "degree_north"
+}

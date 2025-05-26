@@ -1,0 +1,10 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "im_row",
+        "im_col"
+    ],
+    "long_name": "Calibrated image (spectral radiance)",
+    "standard_name": "spectral_radiance",
+    "units": "photon nanometer-1 meter-2 steradian-1 second-1"
+}

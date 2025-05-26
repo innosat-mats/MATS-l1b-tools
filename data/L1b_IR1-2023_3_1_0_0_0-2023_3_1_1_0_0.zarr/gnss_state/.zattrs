@@ -1,0 +1,7 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "gnss_state"
+    ],
+    "long_name": "GNSS State Components",
+    "units": ""
+}
