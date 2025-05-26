@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "quaternion"
+    ],
+    "long_name": "Quaternion relating channel to satellite body frame",
+    "units": ""
+}

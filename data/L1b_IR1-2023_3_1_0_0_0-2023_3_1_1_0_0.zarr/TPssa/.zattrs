@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time"
+    ],
+    "long_name": "Solar scattering angle at tangent point",
+    "standard_name": "scattering_angle",
+    "units": "degree"
+}

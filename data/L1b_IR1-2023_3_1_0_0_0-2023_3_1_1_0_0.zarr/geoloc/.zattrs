@@ -1,0 +1,10 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time",
+        "geo_coord_x",
+        "geo_coord_y",
+        "geo_data"
+    ],
+    "long_name": "Geolocation data",
+    "units": "meter"
+}

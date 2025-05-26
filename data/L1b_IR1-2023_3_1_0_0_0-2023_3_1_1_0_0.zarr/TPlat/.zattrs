@@ -1,0 +1,7 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time"
+    ],
+    "long_name": "Latitude of tangent point for nominal instrument axis at the time of measurement",
+    "units": "degree_north"
+}

@@ -1,0 +1,7 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time"
+    ],
+    "long_name": "Solar zenith angle at satellite position",
+    "units": "degree"
+}

@@ -1,0 +1,8 @@
+{
+    "_ARRAY_DIMENSIONS": [
+        "time"
+    ],
+    "long_name": "Solar zenith angle at tangent point",
+    "standard_name": "solar_zenith_angle",
+    "units": "degree"
+}

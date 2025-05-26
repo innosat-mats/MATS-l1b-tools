@@ -1,0 +1,10 @@
+{
+    "creator_email": "matslead@misu.su.se",
+    "creator_institution": "Department of Meteorology, Stockholm University",
+    "creator_name": "Linda Megner",
+    "date_created": "2025-03-17",
+    "keywords": "Atmosphere, Middle Atmosphere, Airglow, Mesosphere Lower Thermosphere (MLT), Noctilucent clouds, Gravity waves",
+    "license": "Open Data Commons Attribution License (ODC-By) v1.0",
+    "summary": "MATS satellite images (level 1b) of airglow and noctilucent clouds in the mesosphere/lower thermosphere",
+    "title": "mats-level-1b-limb-IR1-1.0"
+}
