@@ -9,7 +9,7 @@ git clone git@github.com:innosat-mats/MATS-l1b-tools.git
 ```
 
 # Optional: Consider special environment 
-Next, you may want to consider creating a special environment for your MATS project. Python 3.11 is the recommended version for compatibility. You do this by (inside the MATS-l1b-tools directory) running the following command:
+Next, you may want to consider creating a special environment for your MATS project. Python 3.11 is the recommended version for compatibility. You do this by running the following command:
 conda create -n MATSlevel1b python=3.11 
 
 # Optional: Installing this repository 
@@ -21,7 +21,7 @@ pip install -e .
 This allows you to execute the files from other working directories.
 
 #### MATS data download with get_zarr.py script
-If you only wish to use the data download script, it should be sufficient to install its dependencies by running
+If you only wish to use the data download script, it should be sufficient to install its dependencies by (inside the MATS-l1b-tools directory) running
 
     pip install -r requirements.txt
 
