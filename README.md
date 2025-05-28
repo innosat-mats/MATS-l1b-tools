@@ -8,8 +8,8 @@ git clone git@github.com:innosat-mats/MATS-l1b-tools.git
 
 
 # Optional: Consider special environment 
-Next, you may want to consider creating a special environment for your MATS project. You do this by (inside the MATS-l1b-tools directory) running the following command:
-conda create -n MATSlevel1b python=3.12 
+Next, you may want to consider creating a special environment for your MATS project. Python 3.11 is the recommended version for compatibility. You do this by (inside the MATS-l1b-tools directory) running the following command:
+conda create -n MATSlevel1b python=3.11 
 
 # Optional: Istalling this repository 
 You can install this repository by executing the following commands. 
