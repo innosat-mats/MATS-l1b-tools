@@ -3,6 +3,19 @@ Repository to hold tools for manipulating, plotting and analyzing MATS L1b datas
 For assistance and discussion please consider joining our MATS discord community
 https://discord.com/channels/1197482909997727774/1197482911763533836
 
+Start by cloning this repository to your working directory for instance using:
+git clone git@github.com:innosat-mats/MATS-l1b-tools.git
+
+
+# Optional: Consider special environment 
+Next, you may want to consider creating a special environment for your MATS project. You do this by (inside the MATS-l1b-tools directory) running the following command:
+conda create -n MATSlevel1b python=3.12 
+
+# Optional: Istalling this repository 
+You can install this repository by executing the following commands. 
+cd MATS-l1b-tools
+pip install -e .
+This allows you to execute the files from other working directories.
 
 #### MATS data download with get_zarr.py script
 If you only wish to use the data download script, it should be sufficient to install its dependencies by running
