@@ -14,8 +14,10 @@ conda create -n MATSlevel1b python=3.11
 
 # Optional: Installing this repository 
 You can install this repository by executing the following commands. 
+```bash
 cd MATS-l1b-tools
 pip install -e .
+```
 This allows you to execute the files from other working directories.
 
 #### MATS data download with get_zarr.py script
