@@ -1,11 +1,6 @@
 #%%
 from mats_l1b_tools import error as error
 from matplotlib import pyplot as plt
-import numpy as np
-import xarray as xr
-import json
-from scipy.io import loadmat
-import os
 from mats_l1b_tools.fetch_data import fetch_MATS_l1b_data
 import datetime
 
