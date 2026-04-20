@@ -239,7 +239,6 @@ def add_flags(ds_slice):
 
     Args:
         ds_slice: xarray.Dataset containing the original data.
-        channel: String identifier for the channel to access specific calibration constants.
 
     Returns:
         ds_slice: xarray.Dataset updated with a new data variables - one for each flag, with a boolean value indicating the presence of the flag.
