@@ -62,7 +62,6 @@ for i, flag in enumerate(flag_names):
     ax[i // 4, i % 4].set_title(f"{channel} {ds_slice[flag].attrs['long_name']}")
     ax[i // 4, i % 4].set_xlabel('Image Column Number')
     ax[i // 4, i % 4].set_ylabel('Image Row Number')
-    ax[i // 4, i % 4].set_title(ds_slice[flag].attrs['long_name'])
     # Set colorbar for each subplot
     plt.colorbar(ax[i // 4, i % 4].images[0], ax=ax[i // 4, i % 4], orientation='vertical')
 
