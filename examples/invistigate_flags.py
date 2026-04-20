@@ -34,7 +34,7 @@ for flag in ['FlagNonlinearCorrection','FlagSaturatedPixel', 'FlagSingleEvent',
 
     plt.xlabel('Image Column Number')
     plt.ylabel('Image Row Number')
-    # set the titel to the flag long name
+    # set the title to the flag long name
     plt.title(channel +' '+ ds_slice[flag].attrs['long_name'])
     plt.show()
 
