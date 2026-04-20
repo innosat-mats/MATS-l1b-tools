@@ -24,8 +24,9 @@ ds_slice = error.add_flags(ds_slice)# %%
 plt.figure()
 for flag in ['FlagNonlinearCorrection','FlagSaturatedPixel', 'FlagSingleEvent',
         'FlagHotPixel']:
-    ds_slice[flag].mean(dim="time").plot()
-    print(f"{flag}: Pixel with maximum mean value has value of {ds_slice[flag].mean(dim='time').max().values}. ")
+    flag_mean = ds_slice[flag].mean(dim="time")
+    flag_mean.plot()
+    print(f"{flag}: Pixel with maximum mean value has value of {flag_mean.max().values}. ")
 
     plt.xlabel('Image Column Number')
     plt.ylabel('Image Row Number')
