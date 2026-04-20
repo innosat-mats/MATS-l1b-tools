@@ -213,3 +213,80 @@ def calc_bit_window(ds_slice):
     ds_slice['WindowMode'] = num_bits
 
     return ds_slice
+
+def add_flags(ds_slice):
+    """
+    Returns the error flags as new data variables, according to the below
+
+    CalibrationErrors 	16 bit number (expressed in decimal form) where bits are according to below:
+    Bit 1 	Flag set to 1 across image if bad column is present in image
+    Bit 2 	Flag to indicate that single event that has been corrected
+    Bit 3 	Flag to indicate a hot pixel, which has been corrected
+    Bit 4 	Flag to indicate that no hot pixel correction has been done to the image
+    Bit 5 	Flag to indicate that negative values appeared after bias subtraction
+    Bit 6 	Flag to indicate that nonlinear correction of more than 5% has been applied for pixel
+    Bit 7 	Flag to indicate that pixel is saturated in summation well, read out register or single pixel
+    Bit 8 	Flag to indicate that the desmear subtraction rendered negative result
+    Bit 9 	Flag to indicate that the desmear subtraction could not estimate realistic atmospheric parameters needed for desmearing, and thus no desmearing has been done
+    Bit 10 	Flag to indicate that the dark current subtraction rendered negative result
+    Bit 11 	Flag for extreme temperature (30C)
+    Bit 12 	Flag indicating no temperature reading and default temperature of -15 C has been used
+    Bit 13 	Flag to indicate flatfield correction rendered negative value
+    Bit 14 	Flag to indicate abnormally large (>5%) flatfield compensation factor
+    Bit 15 	Flag not used
+    Bit 16 	Flag not used
+
+
+    Args:
+        ds_slice: xarray.Dataset containing the original data.
+
+    Returns:
+        ds_slice: xarray.Dataset updated with a new data variables - one for each flag, with a boolean value indicating the presence of the flag.
+    """
+
+    if 'CalibrationErrors' not in ds_slice.variables:
+        raise KeyError('CalibrationErrors not available')
+    calibration_errors = ds_slice['CalibrationErrors'].astype(np.uint16)
+    # Create a new data variable for each flag
+    ds_slice['FlagBadColumns'] = (calibration_errors & 0b0000000000000001) > 0
+    ds_slice['FlagSingleEvent'] = (calibration_errors & 0b0000000000000010) > 0
+    ds_slice['FlagHotPixel'] = (calibration_errors & 0b0000000000000100) > 0
+    ds_slice['FlagNoHotPixel'] = (calibration_errors & 0b0000000000001000) > 0
+    ds_slice['FlagNegativeBias'] = (calibration_errors & 0b0000000000010000) > 0
+    ds_slice['FlagNonlinearCorrection'] = (calibration_errors & 0b0000000000100000) > 0
+    ds_slice['FlagSaturatedPixel'] = (calibration_errors & 0b0000000001000000) > 0
+    ds_slice['FlagDesmearNegative'] = (calibration_errors & 0b0000000010000000) > 0
+    ds_slice['FlagDesmearNoAtmosphere'] = (calibration_errors & 0b0000000100000000) > 0
+    ds_slice['FlagDarkCurrentNegative'] = (calibration_errors & 0b0000001000000000) > 0
+    ds_slice['FlagExtremeTemperature'] = (calibration_errors & 0b0000010000000000) > 0
+    ds_slice['FlagNoTemperature'] = (calibration_errors & 0b0000100000000000) > 0
+    ds_slice['FlagFlatfieldNegative'] = (calibration_errors & 0b0001000000000000) > 0
+    ds_slice['FlagFlatfieldLargeFactor'] = (calibration_errors & 0b0010000000000000) > 0
+    # Note:
+
+    # Flags 15 and 16 are not used, so we do not create variables for them
+    # Remove the original CalibrationErrors variable
+    ds_slice = ds_slice.drop_vars('CalibrationErrors')
+    # Add the flags to the dataset
+    flag_names = [
+        'FlagBadColumns',
+        'FlagSingleEvent',
+        'FlagHotPixel',
+        'FlagNoHotPixel',
+        'FlagNegativeBias',
+        'FlagNonlinearCorrection',
+        'FlagSaturatedPixel',
+        'FlagDesmearNegative',
+        'FlagDesmearNoAtmosphere',
+        'FlagDarkCurrentNegative',
+        'FlagExtremeTemperature',
+        'FlagNoTemperature',
+        'FlagFlatfieldNegative',
+        'FlagFlatfieldLargeFactor'
+    ]
+    for flag in flag_names:
+        ds_slice[flag].attrs['long_name'] = f"Flag indicating presence of {flag.replace('Flag', '').replace('No', 'no ')}"
+        ds_slice[flag].attrs['units'] = 'boolean'
+        ds_slice[flag].attrs['description'] = f"This flag is set to True if the {flag.replace('Flag', '').replace('No', 'no ')} is present in the image."
+    
+    return ds_slice
