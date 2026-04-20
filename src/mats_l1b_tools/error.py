@@ -216,7 +216,7 @@ def calc_bit_window(ds_slice):
 
 def add_flags(ds_slice):
     """
-    Returns the error flags as new data variables, accodring to the below
+    Returns the error flags as new data variables, according to the below
 
     CalibrationErrors 	16 bit number (expressed in decimal form) where bits are according to below:
     Bit 1 	Flag set to 1 across image if bad column is present in image
