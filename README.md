@@ -57,3 +57,19 @@ By default, the latest data version on the Bolin centre server (https://bolin.su
 An example command for running get_zarr.py:
 
     python get_zarr.py -c IR1 -b 2023 2 20 0 0 0 -e 2023 3 1 0 0 0  -f TPlon 10 30
+
+#### Quick-look GUI
+
+A browser-based GUI for exploring the zarr archive by time window, lat/lon
+box and channel is provided in `scripts/quickview.py`. It reports whether
+data is available, suggests the closest match in time and lat/lon when not,
+and plots matching images (as an animated GIF when several are selected).
+
+    pip install -r requirements.txt
+    streamlit run scripts/quickview.py
+
+Selected datasets stay available in `st.session_state["last_results"]` as a
+`{channel: xarray.Dataset}` dict, and each channel can be downloaded as
+netCDF from the page. Set the plot style to *orbit_plot* to use
+`mats_utils.plotting.plotCCD.orbit_plot` (requires MATS-utility-functions
+to be installed).
