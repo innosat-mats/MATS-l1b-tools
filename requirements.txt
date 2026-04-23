@@ -1,11 +1,16 @@
 aiohttp
+cartopy
 DateTime
 fsspec
+matplotlib
 netCDF4
 numpy
+pandas
+pillow
 requests
 s3fs
 scipy
+streamlit
 xarray
 zarr<3.0
 zipp
